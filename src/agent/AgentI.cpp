@@ -1,75 +1,120 @@
-#include <src/common/AgentConfigManager.h>
-#include <src/agent/DispatcherAdapter.h>
-#include <src/agent/AgentI.h>
+#include "src/config/agent_config_manager.h"
+#include "src/config/client_config_manager.h"
+#include "src/config/dispatcher_config.h"
+#include "src/adapter/dispatcher_adapter.h"
+#include "src/agent/AgentI.h"
 
-namespace xlog {
-
-AgentI::AgentI(const AgentConfigManagerPtr& agentConfigCM, const DispatcherAdapterPtr& dispatcher) : Agent(), 
-                agentConfigCM_(agentConfigCM), dispatcher_(dispatcher)
+namespace xlog
 {
-	normalSendWorker_ = new NormalSendWorker;
-	normalSendWorker_->start().detach();
-	failedSendWorker_ = new FailedSendWorker;
-	failedSendWorker_->start().detach();
+
+AgentI::AgentI()
+{
 }
 
-void AgentI::add(const LogDataSeq& data, const ::Ice::Current& current)
+void AgentI::init(const Ice::CommunicatorPtr& ic, const ZKConnectionPtr& conn)
 {
-	normalSendWorker_->add(data);
-}
-    
-void AgentI::addFailedLogData(const LogDataSeq& data, const ::Ice::Current& current)
-{
-	failedSendWorker_->add(data);
+    std::cout << "AgentI::init step " << __LINE__ << std::endl;
+    _config_dispatcher = DispatcherConfigPtr(new DispatcherConfig(conn));
+    std::cout << "AgentI::init step " << __LINE__ << std::endl;
+    _config_dispatcher->init();
+    std::cout << "AgentI::init step " << __LINE__ << std::endl;
+    _adapter_dispatcher = new DispatcherAdapter(ic, _config_dispatcher);
+    std::cout << "AgentI::init step " << __LINE__ << std::endl;
+    _adapter_dispatcher->init();
+    std::cout << "AgentI::init step " << __LINE__ << std::endl;
+    _normalSendWorker = new NormalSendWorker(_adapter_dispatcher);
+    std::cout << "AgentI::init step " << __LINE__ << std::endl;
+    _normalSendWorker->start().detach();
+   // std::cout << "AgentI::init step " << __LINE__ << std::endl;
+   // _failedSendWorker = new FailedSendWorker;
+   // std::cout << "AgentI::init step " << __LINE__ << std::endl;
+   // _failedSendWorker->start().detach();
+   // std::cout << "AgentI::init step " << __LINE__ << std::endl;
 }
 
-::Ice::StringSeq AgentI::getAgents(const ::Ice::Current& current)
+void AgentI::add(const slice::LogDataSeq& data, const ::Ice::Current& current)
 {
-  if(agentConfigCM_)
-  {
-      return agentConfigCM_->getConfig();
-  }
-
-  return ::Ice::StringSeq();
+    //std::cout << "AgentI::add " << data.size() << std::endl;
+    _normalSendWorker->add(data);
 }
 
-void SendWorker::add(const LogDataSeq& data)
+void AgentI::addFailedLogData(const slice::LogDataSeq& data, const ::Ice::Current& current)
 {
-	::IceUtil::Monitor< ::IceUtil::Mutex>::Lock lock(dataMutex_);
-	data_.insert(data_.end(), data.begin(), data.end());
-	dataMutex_.notify();
+    _failedSendWorker->add(data);
+}
+
+::Ice::StringSeq AgentI::subscribeClient(const std::string& prxStr, const ::Ice::Current& current)
+{
+//    if (_clientConfigCM)
+//    {
+//        _clientConfigCM->subscribe(prxStr);
+//    }
+//
+//    if (_agentConfigCM)
+//    {
+//        return _agentConfigCM->getConfig();
+//    }
+
+    return ::Ice::StringSeq();
+}
+
+::Ice::StringSeq AgentI::subscribeSubscriber(const ::Ice::StringSeq& categories,
+        const std::string& prxStr, const ::Ice::Current& current)
+{
+//    if (_dispatcherConfigCM)
+//    {
+//        _dispatcherConfigCM->subscribe(categories, prxStr);
+//    }
+
+//    if (_agentConfigCM)
+//    {
+//        return _agentConfigCM->getConfig();
+//    }
+
+    return ::Ice::StringSeq();
+}
+
+void SendWorker::add(const slice::LogDataSeq& data)
+{
+    ::IceUtil::Monitor<IceUtil::Mutex>::Lock lock(_dataMutex);
+     if(_data.size() == 2000)
+     {
+        std::cout << " cache data count : 2000 over memory limit! " << std::endl;
+     }
+
+    _data.insert(_data.end(), data.begin(), data.end());
+    _dataMutex.notify();
 }
 
 void SendWorker::run()
 {
-	while(true)
-	{
-		LogDataSeq data;
-		{
-			::IceUtil::Monitor< ::IceUtil::Mutex>::Lock lock(dataMutex_);
-			if(data_.empty())
-			{
-				dataMutex_.wait();
-			}
-			data.swap(data_);
-		}
-
-    send(data);
-	}
+    std::vector<slice::LogData>::iterator it;
+    for (;;)
+    {
+        ::IceUtil::Monitor<IceUtil::Mutex>::Lock lock(_dataMutex);
+        if (_data.empty())
+        {
+          _dataMutex.wait();
+        }
+            
+        it=_data.begin(); 
+        while(!send(*it))
+        {
+           std::cout << " fail to send data !" << std::endl;
+        }
+        _data.erase(it);
+    }
 }
 
-bool NormalSendWorker::send(const LogDataSeq& data)
+bool NormalSendWorker::send(const slice::LogData& data)
 {
-  //TODO
-  //dispatcher_->send(data);
-	return true;
+    return _adapter_dispatcher->sendNormal(data);
 }
 
-bool FailedSendWorker::send(const LogDataSeq& data)
+bool FailedSendWorker::send(const slice::LogDataSeq& data)
 {
-  //TODO
-  //dispatcher_->sendFailedLogDatas(data);
-	return true;
+    //TODO
+    return true;
 }
 
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>xlog</artifactId>
+    <groupId>com.renren.dp</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  
+  <groupId>com.renren.dp</groupId>
+  <artifactId>xlog-client</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>xlog-client</name>
+  <url>http://maven.apache.org</url>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <plugins>
+     <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>../../../build/generated</source>
+                <source>src/main/java</source>
+                <source>src/main/resources</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <compilerArguments>
+            <sourcepath>../../../build/generated</sourcepath>
+            <sourcepath>src/main/java</sourcepath>
+            <sourcepath>src/main/resources</sourcepath>
+          </compilerArguments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.zeroc</groupId>
+      <artifactId>Ice</artifactId>
+      <version>3.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+    <version>2.4.1</version>
+   </dependency>
+  </dependencies>
+<!--
+<repository>
+            <id>archiva.snapshots</id>
+            <name>snapshots</name>
+  
+            <url>http://repos.d.xiaonei.com/nexus/content/repositories/snapshots
+  </repository>
+-->
+   <distributionManagement>
+        <snapshotRepository>
+            <id>archiva.snapshots</id>
+            <name>snapshots</name>
+            <url>http://repos.d.xiaonei.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
+</project>

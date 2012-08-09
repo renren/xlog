@@ -1,0 +1,342 @@
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Client environment:java.library.path=/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386/server:/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386:/home/xianquanzhang/install/jdk1.6.0_30/jre/../lib/i386:/usr/lib/jvm/java-6-openjdk/jre/lib/i386/client:/usr/lib/jvm/java-6-openjdk/jre/lib/i386::/usr/java/packages/lib/i386:/lib:/usr/lib
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Client environment:java.io.tmpdir=/tmp
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Client environment:java.compiler=<NA>
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Client environment:os.name=Linux
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Client environment:os.arch=i386
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Client environment:os.version=2.6.32-39-generic
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Client environment:user.name=root
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Client environment:user.home=/root
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Client environment:user.dir=/home/xianquanzhang/xlog/src/java/dispatcher
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ZooKeeper: Initiating client connection, connectString=10.9.18.43:10060,10.9.18.44:10060,10.9.18.45:10060 sessionTimeout=5000 watcher=dp.election.impl.DefaultWatcher@1df8b99
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ClientCnxn: Opening socket connection to server /10.9.18.44:10060
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ClientCnxn: Socket connection established to dblyd5-44.opi.com/10.9.18.44:10060, initiating session
+[xlog] 12-08-06 16:31:03 INFO zookeeper.ClientCnxn: Session establishment complete on server dblyd5-44.opi.com/10.9.18.44:10060, sessionid = 0x238b7b6313f002a, negotiated timeout = 5000
+[xlog] 12-08-06 16:31:03 INFO impl.DefaultWatcher: watcher event had happen,the event state is : SyncConnected
+[xlog] 12-08-06 16:31:03 INFO mortbay.log: Logging to org.slf4j.impl.Log4jLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog
+[xlog] 12-08-06 16:31:03 INFO mortbay.log: jetty-6.0.2
+[xlog] 12-08-06 16:31:03 INFO mortbay.log: Started SelectChannelConnector @ 10.2.62.76:20002
+[xlog] 12-08-06 16:31:09 ERROR mortbay.log: /control: 
+java.lang.IllegalStateException: Committed
+	at org.mortbay.jetty.Response.resetBuffer(Response.java:855)
+	at org.mortbay.jetty.servlet.Dispatcher.forward(Dispatcher.java:211)
+	at org.mortbay.jetty.servlet.Dispatcher.forward(Dispatcher.java:126)
+	at com.renren.dp.xlog.web.action.DispatcherController.doPost(DispatcherController.java:55)
+	at com.renren.dp.xlog.web.action.DispatcherController.doGet(DispatcherController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:689)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:802)
+	at org.mortbay.jetty.servlet.ServletHolder.handle(ServletHolder.java:459)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1054)
+	at com.renren.dp.xlog.web.filter.LoginFilter.doFilter(LoginFilter.java:59)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1045)
+	at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:358)
+	at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:231)
+	at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:629)
+	at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:453)
+	at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:141)
+	at org.mortbay.jetty.Server.handle(Server.java:303)
+	at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:452)
+	at org.mortbay.jetty.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:721)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:509)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:209)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:349)
+	at org.mortbay.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:320)
+	at org.mortbay.thread.BoundedThreadPool$PoolThread.run(BoundedThreadPool.java:475)
+[xlog] 12-08-06 16:31:09 ERROR mortbay.log: /control
+java.lang.IllegalStateException: Committed
+	at org.mortbay.jetty.Response.resetBuffer(Response.java:855)
+	at org.mortbay.jetty.servlet.Dispatcher.forward(Dispatcher.java:211)
+	at org.mortbay.jetty.servlet.Dispatcher.forward(Dispatcher.java:126)
+	at com.renren.dp.xlog.web.action.DispatcherController.doPost(DispatcherController.java:55)
+	at com.renren.dp.xlog.web.action.DispatcherController.doGet(DispatcherController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:689)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:802)
+	at org.mortbay.jetty.servlet.ServletHolder.handle(ServletHolder.java:459)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1054)
+	at com.renren.dp.xlog.web.filter.LoginFilter.doFilter(LoginFilter.java:59)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1045)
+	at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:358)
+	at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:231)
+	at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:629)
+	at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:453)
+	at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:141)
+	at org.mortbay.jetty.Server.handle(Server.java:303)
+	at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:452)
+	at org.mortbay.jetty.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:721)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:509)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:209)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:349)
+	at org.mortbay.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:320)
+	at org.mortbay.thread.BoundedThreadPool$PoolThread.run(BoundedThreadPool.java:475)
+[xlog] 12-08-06 16:32:29 ERROR mortbay.log: /control: 
+java.lang.IllegalStateException: Committed
+	at org.mortbay.jetty.Response.resetBuffer(Response.java:855)
+	at org.mortbay.jetty.servlet.Dispatcher.forward(Dispatcher.java:211)
+	at org.mortbay.jetty.servlet.Dispatcher.forward(Dispatcher.java:126)
+	at com.renren.dp.xlog.web.action.DispatcherController.doPost(DispatcherController.java:55)
+	at com.renren.dp.xlog.web.action.DispatcherController.doGet(DispatcherController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:689)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:802)
+	at org.mortbay.jetty.servlet.ServletHolder.handle(ServletHolder.java:459)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1054)
+	at com.renren.dp.xlog.web.filter.LoginFilter.doFilter(LoginFilter.java:59)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1045)
+	at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:358)
+	at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:231)
+	at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:629)
+	at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:453)
+	at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:141)
+	at org.mortbay.jetty.Server.handle(Server.java:303)
+	at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:452)
+	at org.mortbay.jetty.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:721)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:509)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:209)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:349)
+	at org.mortbay.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:320)
+	at org.mortbay.thread.BoundedThreadPool$PoolThread.run(BoundedThreadPool.java:475)
+[xlog] 12-08-06 16:32:29 ERROR mortbay.log: /control
+java.lang.IllegalStateException: Committed
+	at org.mortbay.jetty.Response.resetBuffer(Response.java:855)
+	at org.mortbay.jetty.servlet.Dispatcher.forward(Dispatcher.java:211)
+	at org.mortbay.jetty.servlet.Dispatcher.forward(Dispatcher.java:126)
+	at com.renren.dp.xlog.web.action.DispatcherController.doPost(DispatcherController.java:55)
+	at com.renren.dp.xlog.web.action.DispatcherController.doGet(DispatcherController.java:60)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:689)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:802)
+	at org.mortbay.jetty.servlet.ServletHolder.handle(ServletHolder.java:459)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1054)
+	at com.renren.dp.xlog.web.filter.LoginFilter.doFilter(LoginFilter.java:59)
+	at org.mortbay.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1045)
+	at org.mortbay.jetty.servlet.ServletHandler.handle(ServletHandler.java:358)
+	at org.mortbay.jetty.servlet.SessionHandler.handle(SessionHandler.java:231)
+	at org.mortbay.jetty.handler.ContextHandler.handle(ContextHandler.java:629)
+	at org.mortbay.jetty.webapp.WebAppContext.handle(WebAppContext.java:453)
+	at org.mortbay.jetty.handler.HandlerWrapper.handle(HandlerWrapper.java:141)
+	at org.mortbay.jetty.Server.handle(Server.java:303)
+	at org.mortbay.jetty.HttpConnection.handleRequest(HttpConnection.java:452)
+	at org.mortbay.jetty.HttpConnection$RequestHandler.headerComplete(HttpConnection.java:721)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:509)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:209)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:349)
+	at org.mortbay.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:320)
+	at org.mortbay.thread.BoundedThreadPool$PoolThread.run(BoundedThreadPool.java:475)
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:zookeeper.version=3.3.3-1203054, built on 11/17/2011 05:47 GMT
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:host.name=xianquanzhang
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:java.version=1.6.0_30
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:java.vendor=Sun Microsystems Inc.
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:java.home=/home/xianquanzhang/install/jdk1.6.0_30/jre
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:java.class.path=/home/xianquanzhang/xlog/src/java/dispatcher/target/classes:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/zeroc/Ice/3.3.1/Ice-3.3.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/zookeeper/zookeeper/3.3.4/zookeeper-3.3.4.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/mail/mail/1.4/mail-1.4.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/jms/jms/1.1/jms-1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sun/jdmk/jmxtools/1.2.1/jmxtools-1.2.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sun/jmx/jmxri/1.2.1/jmxri-1.2.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/google/protobuf/protobuf-java/2.4.1/protobuf-java-2.4.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/hadoop/hadoop-common/0.21.0/hadoop-common-0.21.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/hadoop/hadoop-hdfs/0.21.0/hadoop-hdfs-0.21.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/junit/junit/4.0/junit-4.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/slf4j/slf4j-log4j12/1.5.8/slf4j-log4j12-1.5.8.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jetty/6.0.2/jetty-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jetty-util/6.0.2/jetty-util-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jsp/2.1-6.0.2/jsp-2.1-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jsp-api/2.1-6.0.2/jsp-api-2.1-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/servlet-api/2.5-6.0.2/servlet-api-2.5-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/ant/ant/1.6.5/ant-1.6.5.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sso/sso-client/1.0/sso-client-1.0.jar
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:java.library.path=/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386/server:/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386:/home/xianquanzhang/install/jdk1.6.0_30/jre/../lib/i386:/usr/lib/jvm/java-6-openjdk/jre/lib/i386/client:/usr/lib/jvm/java-6-openjdk/jre/lib/i386::/usr/java/packages/lib/i386:/lib:/usr/lib
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:java.io.tmpdir=/tmp
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:java.compiler=<NA>
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:os.name=Linux
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:os.arch=i386
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:os.version=2.6.32-39-generic
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:user.name=root
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:user.home=/root
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Client environment:user.dir=/home/xianquanzhang/xlog/src/java/dispatcher
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ZooKeeper: Initiating client connection, connectString=10.9.18.43:10060,10.9.18.44:10060,10.9.18.45:10060 sessionTimeout=5000 watcher=dp.election.impl.DefaultWatcher@1df8b99
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ClientCnxn: Opening socket connection to server /10.9.18.43:10060
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ClientCnxn: Socket connection established to dblyd5-43.opi.com/10.9.18.43:10060, initiating session
+[xlog] 12-08-06 16:32:39 INFO zookeeper.ClientCnxn: Session establishment complete on server dblyd5-43.opi.com/10.9.18.43:10060, sessionid = 0x138b7b63139002e, negotiated timeout = 5000
+[xlog] 12-08-06 16:32:39 INFO impl.DefaultWatcher: watcher event had happen,the event state is : SyncConnected
+[xlog] 12-08-06 16:32:39 INFO mortbay.log: Logging to org.slf4j.impl.Log4jLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog
+[xlog] 12-08-06 16:32:39 INFO mortbay.log: jetty-6.0.2
+[xlog] 12-08-06 16:32:40 INFO mortbay.log: Started SelectChannelConnector @ 10.2.62.76:20002
+[xlog] 12-08-06 16:34:10 INFO zookeeper.ZooKeeper: Session: 0x138b7b63139002e closed
+[xlog] 12-08-06 16:34:10 INFO zookeeper.ClientCnxn: EventThread shut down
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:zookeeper.version=3.3.3-1203054, built on 11/17/2011 05:47 GMT
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:host.name=xianquanzhang
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:java.version=1.6.0_30
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:java.vendor=Sun Microsystems Inc.
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:java.home=/home/xianquanzhang/install/jdk1.6.0_30/jre
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:java.class.path=/home/xianquanzhang/xlog/src/java/dispatcher/target/classes:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/zeroc/Ice/3.3.1/Ice-3.3.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/zookeeper/zookeeper/3.3.4/zookeeper-3.3.4.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/mail/mail/1.4/mail-1.4.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/jms/jms/1.1/jms-1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sun/jdmk/jmxtools/1.2.1/jmxtools-1.2.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sun/jmx/jmxri/1.2.1/jmxri-1.2.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/google/protobuf/protobuf-java/2.4.1/protobuf-java-2.4.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/hadoop/hadoop-common/0.21.0/hadoop-common-0.21.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/hadoop/hadoop-hdfs/0.21.0/hadoop-hdfs-0.21.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/junit/junit/4.0/junit-4.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/slf4j/slf4j-log4j12/1.5.8/slf4j-log4j12-1.5.8.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jetty/6.0.2/jetty-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jetty-util/6.0.2/jetty-util-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jsp/2.1-6.0.2/jsp-2.1-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jsp-api/2.1-6.0.2/jsp-api-2.1-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/servlet-api/2.5-6.0.2/servlet-api-2.5-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/ant/ant/1.6.5/ant-1.6.5.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sso/sso-client/1.0/sso-client-1.0.jar
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:java.library.path=/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386/server:/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386:/home/xianquanzhang/install/jdk1.6.0_30/jre/../lib/i386:/usr/lib/jvm/java-6-openjdk/jre/lib/i386/client:/usr/lib/jvm/java-6-openjdk/jre/lib/i386::/usr/java/packages/lib/i386:/lib:/usr/lib
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:java.io.tmpdir=/tmp
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:java.compiler=<NA>
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:os.name=Linux
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:os.arch=i386
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:os.version=2.6.32-39-generic
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:user.name=root
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:user.home=/root
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Client environment:user.dir=/home/xianquanzhang/xlog/src/java/dispatcher
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ZooKeeper: Initiating client connection, connectString=10.9.18.43:10060,10.9.18.44:10060,10.9.18.45:10060 sessionTimeout=5000 watcher=dp.election.impl.DefaultWatcher@1df8b99
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ClientCnxn: Opening socket connection to server /10.9.18.44:10060
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ClientCnxn: Socket connection established to dblyd5-44.opi.com/10.9.18.44:10060, initiating session
+[xlog] 12-08-06 16:34:49 INFO zookeeper.ClientCnxn: Session establishment complete on server dblyd5-44.opi.com/10.9.18.44:10060, sessionid = 0x238b7b6313f002b, negotiated timeout = 5000
+[xlog] 12-08-06 16:34:49 INFO impl.DefaultWatcher: watcher event had happen,the event state is : SyncConnected
+[xlog] 12-08-06 16:34:49 INFO mortbay.log: Logging to org.slf4j.impl.Log4jLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog
+[xlog] 12-08-06 16:34:49 INFO mortbay.log: jetty-6.0.2
+[xlog] 12-08-06 16:34:50 INFO mortbay.log: Started SelectChannelConnector @ 10.2.62.76:20002
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:zookeeper.version=3.3.3-1203054, built on 11/17/2011 05:47 GMT
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:host.name=xianquanzhang
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:java.version=1.6.0_30
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:java.vendor=Sun Microsystems Inc.
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:java.home=/home/xianquanzhang/install/jdk1.6.0_30/jre
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:java.class.path=/home/xianquanzhang/xlog/src/java/dispatcher/target/classes:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/zeroc/Ice/3.3.1/Ice-3.3.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/zookeeper/zookeeper/3.3.4/zookeeper-3.3.4.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/mail/mail/1.4/mail-1.4.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/jms/jms/1.1/jms-1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sun/jdmk/jmxtools/1.2.1/jmxtools-1.2.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sun/jmx/jmxri/1.2.1/jmxri-1.2.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/google/protobuf/protobuf-java/2.4.1/protobuf-java-2.4.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/hadoop/hadoop-common/0.21.0/hadoop-common-0.21.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/hadoop/hadoop-hdfs/0.21.0/hadoop-hdfs-0.21.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/junit/junit/4.0/junit-4.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/slf4j/slf4j-log4j12/1.5.8/slf4j-log4j12-1.5.8.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jetty/6.0.2/jetty-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jetty-util/6.0.2/jetty-util-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jsp/2.1-6.0.2/jsp-2.1-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jsp-api/2.1-6.0.2/jsp-api-2.1-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/servlet-api/2.5-6.0.2/servlet-api-2.5-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/ant/ant/1.6.5/ant-1.6.5.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sso/sso-client/1.0/sso-client-1.0.jar
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:java.library.path=/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386/server:/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386:/home/xianquanzhang/install/jdk1.6.0_30/jre/../lib/i386:/usr/lib/jvm/java-6-openjdk/jre/lib/i386/client:/usr/lib/jvm/java-6-openjdk/jre/lib/i386::/usr/java/packages/lib/i386:/lib:/usr/lib
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:java.io.tmpdir=/tmp
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:java.compiler=<NA>
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:os.name=Linux
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:os.arch=i386
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:os.version=2.6.32-39-generic
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:user.name=root
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:user.home=/root
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Client environment:user.dir=/home/xianquanzhang/xlog/src/java/dispatcher
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ZooKeeper: Initiating client connection, connectString=10.9.18.43:10060,10.9.18.44:10060,10.9.18.45:10060 sessionTimeout=5000 watcher=dp.election.impl.DefaultWatcher@1462851
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ClientCnxn: Opening socket connection to server /10.9.18.43:10060
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ClientCnxn: Socket connection established to dblyd5-43.opi.com/10.9.18.43:10060, initiating session
+[xlog] 12-08-06 16:51:05 INFO zookeeper.ClientCnxn: Session establishment complete on server dblyd5-43.opi.com/10.9.18.43:10060, sessionid = 0x138b7b63139002f, negotiated timeout = 5000
+[xlog] 12-08-06 16:51:05 INFO impl.DefaultWatcher: watcher event had happen,the event state is : SyncConnected
+[xlog] 12-08-06 16:51:05 INFO mortbay.log: Logging to org.slf4j.impl.Log4jLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog
+[xlog] 12-08-06 16:51:05 INFO mortbay.log: jetty-6.0.2
+[xlog] 12-08-06 16:51:05 INFO mortbay.log: Started SelectChannelConnector @ 10.2.62.76:20002
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:zookeeper.version=3.3.3-1203054, built on 11/17/2011 05:47 GMT
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:host.name=xianquanzhang
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:java.version=1.6.0_30
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:java.vendor=Sun Microsystems Inc.
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:java.home=/home/xianquanzhang/install/jdk1.6.0_30/jre
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:java.class.path=/home/xianquanzhang/xlog/src/java/dispatcher/target/classes:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/zeroc/Ice/3.3.1/Ice-3.3.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/zookeeper/zookeeper/3.3.4/zookeeper-3.3.4.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/mail/mail/1.4/mail-1.4.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/javax/jms/jms/1.1/jms-1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sun/jdmk/jmxtools/1.2.1/jmxtools-1.2.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sun/jmx/jmxri/1.2.1/jmxri-1.2.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/google/protobuf/protobuf-java/2.4.1/protobuf-java-2.4.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/hadoop/hadoop-common/0.21.0/hadoop-common-0.21.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/apache/hadoop/hadoop-hdfs/0.21.0/hadoop-hdfs-0.21.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/junit/junit/4.0/junit-4.0.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/org/slf4j/slf4j-log4j12/1.5.8/slf4j-log4j12-1.5.8.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jetty/6.0.2/jetty-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jetty-util/6.0.2/jetty-util-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jsp/2.1-6.0.2/jsp-2.1-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/jsp-api/2.1-6.0.2/jsp-api-2.1-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/jetty/servlet-api/2.5-6.0.2/servlet-api-2.5-6.0.2.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/ant/ant/1.6.5/ant-1.6.5.jar:/home/xianquanzhang/install/eclipse/~/.m2/repository/com/sso/sso-client/1.0/sso-client-1.0.jar
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:java.library.path=/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386/server:/home/xianquanzhang/install/jdk1.6.0_30/jre/lib/i386:/home/xianquanzhang/install/jdk1.6.0_30/jre/../lib/i386:/usr/lib/jvm/java-6-openjdk/jre/lib/i386/client:/usr/lib/jvm/java-6-openjdk/jre/lib/i386::/usr/java/packages/lib/i386:/lib:/usr/lib
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:java.io.tmpdir=/tmp
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:java.compiler=<NA>
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:os.name=Linux
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:os.arch=i386
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:os.version=2.6.32-39-generic
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:user.name=root
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:user.home=/root
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Client environment:user.dir=/home/xianquanzhang/xlog/src/java/dispatcher
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ZooKeeper: Initiating client connection, connectString=10.2.62.76:2222 sessionTimeout=5000 watcher=dp.election.impl.DefaultWatcher@1462851
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ClientCnxn: Opening socket connection to server /10.2.62.76:2222
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ClientCnxn: Socket connection established to xianquanzhang/10.2.62.76:2222, initiating session
+[xlog] 12-08-07 09:40:07 INFO zookeeper.ClientCnxn: Session establishment complete on server xianquanzhang/10.2.62.76:2222, sessionid = 0x138a23ea74400ef, negotiated timeout = 5000
+[xlog] 12-08-07 09:40:07 INFO impl.DefaultWatcher: watcher event had happen,the event state is : SyncConnected
+[xlog] 12-08-07 09:40:08 INFO mortbay.log: Logging to org.slf4j.impl.Log4jLoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog
+[xlog] 12-08-07 09:40:08 INFO mortbay.log: jetty-6.0.2
+[xlog] 12-08-07 09:40:08 INFO mortbay.log: Started SelectChannelConnector @ 10.2.62.76:20002
+[xlog] 12-08-07 09:57:52 INFO security.Groups: Group mapping impl=org.apache.hadoop.security.ShellBasedUnixGroupsMapping; cacheTimeout=300000
+[xlog] 12-08-07 09:57:53 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 09:57:53 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 09:57:53 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 10:10:07 DEBUG sync.SyncTimer: it start 4 threads to sync data!
+[xlog] 12-08-07 10:15:17 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 10:40:07 DEBUG sync.SyncTimer: it start 4 threads to sync data!
+[xlog] 12-08-07 11:10:07 DEBUG sync.SyncTimer: it start 4 threads to sync data!
+[xlog] 12-08-07 11:30:12 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 11:40:07 DEBUG sync.SyncTimer: it start 5 threads to sync data!
+[xlog] 12-08-07 12:10:07 DEBUG sync.SyncTimer: it start 4 threads to sync data!
+[xlog] 12-08-07 12:40:07 DEBUG sync.SyncTimer: it start 4 threads to sync data!
+[xlog] 12-08-07 13:10:07 DEBUG sync.SyncTimer: it start 4 threads to sync data!
+[xlog] 12-08-07 13:40:07 DEBUG sync.SyncTimer: it start 4 threads to sync data!
+[xlog] 12-08-07 14:10:07 DEBUG sync.SyncTimer: it start 4 threads to sync data!
+[xlog] 12-08-07 14:40:07 DEBUG sync.SyncTimer: it start 4 threads to sync data!
+[xlog] 12-08-07 14:53:01 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 15:10:07 DEBUG sync.SyncTimer: it start 5 threads to sync data!
+[xlog] 12-08-07 15:40:07 DEBUG sync.SyncTimer: it start 5 threads to sync data!
+[xlog] 12-08-07 15:53:45 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 16:10:07 DEBUG sync.SyncTimer: it start 6 threads to sync data!
+[xlog] 12-08-07 16:19:06 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 16:40:07 DEBUG sync.SyncTimer: it start 7 threads to sync data!
+[xlog] 12-08-07 16:55:12 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 16:57:59 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 17:10:07 DEBUG sync.SyncTimer: it start 9 threads to sync data!
+[xlog] 12-08-07 17:16:07 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 17:40:07 DEBUG sync.SyncTimer: it start 9 threads to sync data!
+[xlog] 12-08-07 17:44:35 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 18:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 18:24:13 ERROR impl.HDFSAdapter: fail to close hdfs outputstream
+[xlog] 12-08-07 18:24:13 DEBUG impl.HDFSAdapter: success to get HDFSOutputStream!
+[xlog] 12-08-07 18:40:07 DEBUG sync.SyncTimer: it start 11 threads to sync data!
+[xlog] 12-08-07 19:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 19:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 20:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 20:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 21:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 21:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 22:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 22:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 23:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-07 23:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 00:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 00:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 01:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 01:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 02:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 02:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 03:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 03:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 04:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 04:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 05:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 05:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 06:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 06:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 07:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 07:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 08:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 08:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 09:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 09:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 10:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 10:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 11:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 11:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 12:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 12:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 13:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 13:40:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 14:10:07 DEBUG sync.SyncTimer: it start 10 threads to sync data!
+[xlog] 12-08-08 14:10:12 WARN hdfs.DFSClient: DFSOutputStream ResponseProcessor exception  for block blk_1664372801211032483_1309java.io.EOFException
+	at java.io.DataInputStream.readFully(DataInputStream.java:180)
+	at java.io.DataInputStream.readLong(DataInputStream.java:399)
+	at org.apache.hadoop.hdfs.protocol.DataTransferProtocol$PipelineAck.readFields(DataTransferProtocol.java:531)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor.run(DFSOutputStream.java:616)
+
+[xlog] 12-08-08 14:10:12 ERROR hdfs.DFSClient: Exception closing file /user/root/som/cdn/n2/2012-08-07-15.x1 : java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.setupPipelineForAppendOrRecovery(DFSOutputStream.java:753)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.processDatanodeError(DFSOutputStream.java:701)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:391)
+[xlog] 12-08-08 14:10:12 WARN hdfs.DFSClient: DFSOutputStream ResponseProcessor exception  for block blk_9220368195201447003_1313java.io.EOFException
+	at java.io.DataInputStream.readFully(DataInputStream.java:180)
+	at java.io.DataInputStream.readLong(DataInputStream.java:399)
+	at org.apache.hadoop.hdfs.protocol.DataTransferProtocol$PipelineAck.readFields(DataTransferProtocol.java:531)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor.run(DFSOutputStream.java:616)
+
+[xlog] 12-08-08 14:10:12 ERROR hdfs.DFSClient: Exception closing file /user/root/som/cdn/n4/2012-08-07-17.x1 : java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.setupPipelineForAppendOrRecovery(DFSOutputStream.java:753)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.processDatanodeError(DFSOutputStream.java:701)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:391)
+[xlog] 12-08-08 14:10:12 WARN hdfs.DFSClient: DFSOutputStream ResponseProcessor exception  for block blk_-4660840408392264_1314java.io.EOFException
+	at java.io.DataInputStream.readFully(DataInputStream.java:180)
+	at java.io.DataInputStream.readLong(DataInputStream.java:399)
+	at org.apache.hadoop.hdfs.protocol.DataTransferProtocol$PipelineAck.readFields(DataTransferProtocol.java:531)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor.run(DFSOutputStream.java:616)
+
+[xlog] 12-08-08 14:10:12 ERROR hdfs.DFSClient: Exception closing file /user/root/som/cdn/n5/2012-08-07-17.x1 : java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.setupPipelineForAppendOrRecovery(DFSOutputStream.java:753)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.processDatanodeError(DFSOutputStream.java:701)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:391)
+[xlog] 12-08-08 14:10:12 WARN hdfs.DFSClient: DFSOutputStream ResponseProcessor exception  for block blk_5971996196925843503_1310java.io.EOFException
+	at java.io.DataInputStream.readFully(DataInputStream.java:180)
+	at java.io.DataInputStream.readLong(DataInputStream.java:399)
+	at org.apache.hadoop.hdfs.protocol.DataTransferProtocol$PipelineAck.readFields(DataTransferProtocol.java:531)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor.run(DFSOutputStream.java:616)
+
+[xlog] 12-08-08 14:10:12 ERROR hdfs.DFSClient: Exception closing file /user/root/som/cdn/n3/2012-08-07-16.x1 : java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.setupPipelineForAppendOrRecovery(DFSOutputStream.java:753)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.processDatanodeError(DFSOutputStream.java:701)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:391)
+[xlog] 12-08-08 14:10:12 WARN hdfs.DFSClient: DFSOutputStream ResponseProcessor exception  for block blk_9141828270886379600_1304java.io.EOFException
+	at java.io.DataInputStream.readFully(DataInputStream.java:180)
+	at java.io.DataInputStream.readLong(DataInputStream.java:399)
+	at org.apache.hadoop.hdfs.protocol.DataTransferProtocol$PipelineAck.readFields(DataTransferProtocol.java:531)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor.run(DFSOutputStream.java:616)
+
+[xlog] 12-08-08 14:10:12 ERROR hdfs.DFSClient: Exception closing file /user/root/som/cdn/2012-08-07-09.x1 : java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+java.io.IOException: All datanodes 10.2.62.76:50010 are bad. Aborting...
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.setupPipelineForAppendOrRecovery(DFSOutputStream.java:753)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.processDatanodeError(DFSOutputStream.java:701)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:391)
