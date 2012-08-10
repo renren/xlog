@@ -19,7 +19,7 @@ public:
     {
         if(argc==1)
         {
-            cout << "Usage:zk_host:zk_port/xlog_path [-udp|-tcp] agent_host:agent_port"<<endl;
+            cout << "Usage:zk_host:zk_port [-udp|-tcp] agent_host:agent_port"<<endl;
             return 0;
         }
         *argv++;

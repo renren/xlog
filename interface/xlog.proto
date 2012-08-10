@@ -1,0 +1,11 @@
+
+package xlog.proto;
+
+message ClusterInfo {
+    required int32 size = 1;
+};
+
+message ItemInfo {
+    required int32 type = 1;
+    required string location = 2;
+};
