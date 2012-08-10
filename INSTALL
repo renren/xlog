@@ -1,0 +1,37 @@
+Introduction
+============
+
+  This installation guide is for Linux or ubuntu systems.
+
+  Quick start
+-------------------------------
+1 download this source code
+
+2 install library
+install boost
+install Ice (version 3.3 +)
+install protobuff (version 2.2 +)
+install zookeeper (version 3.4.3+)
+install maven (version 2.2+)
+
+3 set system environment variables
+ICE_HOME,ZOOKEEPER_HOME,PROTOBUF_HOME,BOOST_HOME,M2_HOME
+
+4 cd xlog root directory and execute make command,then go to src/java directory and execute maven
+command,eg:mvn install -Dmaven.test.skip
+
+  Introduce main file
+---------------------------------
+1 build/config.bootstrap  
+    This executable file is config zookeeper.Run this executable file will give you tip and input some parameters.
+For example,Usage:zk_host:zk_port/xlog_path slot_count,zookeeper host ,port ,xlog root path at zookeeper and slot count.
+
+2 build/agent.binary 
+    This executable file is agent node.Run this executable file will give you tip and input some parameters.
+For example,Usage:zk_host:zk_port [-udp|-tcp] agent_host:agent_port,zookeeper host,port ,protocol type,agent node host,agent node port.
+
+3 src/java/dispatcher/target/xlog-dispatcher-1.0-SNAPSHOT-release.tar.gz 
+     This is a dispatcher package.
+
+4 src/java/client/target/xlog-client-1.0-SNAPSHOT.jar
+     This is a client jar file.
