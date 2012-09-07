@@ -66,13 +66,13 @@ public class SystemManager {
 	
 	private String fileSizeFormat(long size){
 		if(size<1024){
-			return size+"KB";
+			return size+"K";
 		}else if(size<1048576){
 			size=size/1024;
-			return size+"MB";
+			return size+"M";
 		}else{
 			size=size/1048576;
-			return size+"MB";
+			return size+"G";
 		}
 	}
 }

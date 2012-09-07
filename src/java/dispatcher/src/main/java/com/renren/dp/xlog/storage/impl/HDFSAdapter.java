@@ -4,11 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -23,14 +21,16 @@ import com.renren.dp.xlog.storage.StorageAdapter;
 import com.renren.dp.xlog.util.Constants;
 import com.renren.dp.xlog.util.LogDataFormat;
 
-public class HDFSAdapter implements StorageAdapter{
+public abstract class HDFSAdapter implements StorageAdapter{
 
-	private FileSystem fs=null;
+	protected FileSystem fs=null;
+	protected String hdfsURI=null;
+	protected String dfsReplication=null;
+	protected Long socketTimeOut;
+	
 	private String currentFileNameNumber;
 	private String uuid=null;
 	private int bufferSize=0;
-	private String hdfsURI=null;
-	private String dfsReplication=null;
 	
 	private ConcurrentHashMap<String,FSDataOutputStream> categoryOfHdfsOS=new ConcurrentHashMap<String,FSDataOutputStream>();
 	
@@ -41,6 +41,7 @@ public class HDFSAdapter implements StorageAdapter{
 		this.bufferSize=bufferSize;
 		this.hdfsURI=com.renren.dp.xlog.config.Configuration.getString("storage.uri");
 		this.dfsReplication=com.renren.dp.xlog.config.Configuration.getString("storage.replication","3");
+		this.socketTimeOut=com.renren.dp.xlog.config.Configuration.getLong("dfs.socket.timeout", 180)*1000;
 	}
 	
 	@Override
@@ -202,31 +203,9 @@ public class HDFSAdapter implements StorageAdapter{
 		return hdfsOutput;
 	}
 	
-	private boolean flush(FSDataOutputStream hdfsOutput,String path){
-		try {
-			hdfsOutput.hflush();
-		} catch (IOException e) {
-			logger.error("fail to flush data to hdfs,and get hdfs ouputstream again! the exception is : "+e.getMessage());
-			try {
-				hdfsOutput.close();
-			} catch (IOException e1) {
-				logger.error("fail to close hdfs outputstream",e1.getMessage());
-			}
-			hdfsOutput=getHDFSOutputStream(path);
-			try {
-				if(hdfsOutput !=null){
-					hdfsOutput.hflush();
-					logger.info("success to reflush data to hdfs! ");
-				}
-			} catch (IOException e1) {
-				logger.error("fail to reflush data to hdfs! the exception is : "+e.getMessage());
-				return false;
-			}
-		}
-		return true;
-	}
+	public abstract boolean flush(FSDataOutputStream hdfsOutput,String path);
 	
-	private FSDataOutputStream getHDFSOutputStream(String path){
+	protected FSDataOutputStream getHDFSOutputStream(String path){
 		Path p=new Path(path+"."+uuid);
 		try{
 			//判断文件是否存在，因为有可能别的节点已经创建了该文件
@@ -254,16 +233,6 @@ public class HDFSAdapter implements StorageAdapter{
 			logger.error("fail to recreate HDFSOutputstream,the exception is "+e.getMessage());
 			return null;
 		}
-	}
-
-	@Override
-	public void initialize() throws IOException {
-		Configuration conf=new Configuration();
-		conf.set("dfs.replication",dfsReplication);
-		if(fs!=null){
-			fs.close();
-		}
-		fs=FileSystem.newInstance(URI.create(hdfsURI),conf);
 	}
 
 	@Override

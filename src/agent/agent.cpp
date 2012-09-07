@@ -19,7 +19,7 @@ public:
     {
         if(argc==1)
         {
-            cout << "Usage:zk_host:zk_port [-udp|-tcp] agent_host:agent_port"<<endl;
+            cout << "Usage:zk_host:zk_port [-udp|-tcp] agent_host:agent_port while_list_file_name"<<endl;
             return 0;
         }
         *argv++;
@@ -37,7 +37,7 @@ public:
         std::string udp("-udp");
         bool is_udp=udp.compare(*argv++)==0?true:false;
 
-        boost::algorithm::split(parts, *argv, boost::algorithm::is_any_of(":"));
+        boost::algorithm::split(parts, *argv++, boost::algorithm::is_any_of(":"));
         if (parts.size() != 2)
         {
             std::cerr << "agent host:port is " << *argv 
@@ -62,7 +62,7 @@ public:
                 os.str());
         std::cout << "new AgentI. ";
         AgentIPtr agent = new AgentI;
-        agent->init(ic, conn);
+        agent->init(ic, conn, *argv);
         std::cout << "done." << endl;
         Ice::ObjectPrx prx = adapter->add(agent, ic->stringToIdentity("A"));
         std::cout << "Activating ";

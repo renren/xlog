@@ -98,8 +98,13 @@
 		<td align="left">存储缓存数据的本地路径</td>
 	</tr>
 	<tr>
-		<td align="left">缓存数据保留时间</td>
-		<td align="left"><%=sm.getParam("oplog.cache.time") %></td>
+		<td align="left">本地备份数据缓存时间</td>
+		<td align="left"><%=sm.getParam("local.store.cache.time") %></td>
+		<td align="left">超过该时间即删除,0-表示永久存储，单位:分钟(min)</td>
+	</tr>
+	<tr>
+		<td align="left">写存储失败数据缓存时间</td>
+		<td align="left"><%=sm.getParam("error.data.cache.time") %></td>
 		<td align="left">超过该时间即删除,0-表示永久存储，单位:分钟(min)</td>
 	</tr>
 	<tr>

@@ -6,6 +6,10 @@
 #include <IceUtil/Mutex.h>
 #include <IceUtil/Monitor.h>
 
+#include <string>
+#include <iostream>
+#include <fstream>
+
 #include "src/common/common.h"
 #include "src/common/zk_conn.h"
 
@@ -18,11 +22,28 @@ typedef IceUtil::Handle<NormalSendWorker> NormalSendWorkerPtr;
 class FailedSendWorker;
 typedef IceUtil::Handle<FailedSendWorker> FailedSendWorkerPtr;
 
+class WhiteListManager : public IceUtil::Thread
+{
+public:
+    WhiteListManager();
+    void initialize(const std::string& file_name);
+    bool doValidate(const slice::LogDataSeq& data);
+
+protected:
+    virtual void run();
+
+private:
+    Ice::StringSeq white_list;
+    std::string wl_file_name;
+    ::IceUtil::Monitor<IceUtil::Mutex> _mutex;
+    void load();
+};
+
 class AgentI: virtual public slice::Agent
 {
 public:
     AgentI();
-    void init(const Ice::CommunicatorPtr& ic, const ZKConnectionPtr& conn);
+    void init(const Ice::CommunicatorPtr& ic, const ZKConnectionPtr& conn,const std::string& w_list);
     /**
      * 收集client的log信息
      * @param data log信息
@@ -50,10 +71,13 @@ public:
 private:
     NormalSendWorkerPtr _normalSendWorker; /**发送正常数据的worker*/
     FailedSendWorkerPtr _failedSendWorker; /**发送失败数据的worker*/
+    WhiteListManager* wlm;
 //    AgentConfigPtr _agentConfigCM;
 //    ClientConfigPtr _clientConfigCM;
+//    Ice::StringSeq white_list;
     DispatcherConfigPtr _config_dispatcher;
     DispatcherAdapterPtr _adapter_dispatcher;
+//    bool doValidate(const slice::LogDataSeq& data);
 };
 
 typedef IceUtil::Handle<AgentI> AgentIPtr;
@@ -95,7 +119,7 @@ class FailedSendWorker: public SendWorker
 protected:
     virtual bool send(const slice::LogDataSeq& data);
 };
-
+    
 }
 
 #endif

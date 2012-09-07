@@ -3,6 +3,7 @@ package com.renren.dp.xlog.handler;
 import com.renren.dp.xlog.config.Configuration;
 import com.renren.dp.xlog.handler.impl.FileNameHandlerOf10Min;
 import com.renren.dp.xlog.handler.impl.FileNameHandlerOf5Min;
+import com.renren.dp.xlog.handler.impl.FileNameHandlerOfHour;
 
 public class FileNameHandlerFactory {
 
@@ -15,6 +16,8 @@ public class FileNameHandlerFactory {
 				fileNameHandler=new FileNameHandlerOf5Min();
 			}else if(fileNameFormat == 1){
 				fileNameHandler=new FileNameHandlerOf10Min();
+			}else if(fileNameFormat == 2){
+				fileNameHandler=new FileNameHandlerOfHour();
 			}
 		}
 		return fileNameHandler;

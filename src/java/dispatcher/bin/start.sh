@@ -1,27 +1,30 @@
 #!/bin/bash
 
 #BASEDIR=`dirname $0`
-cd ..
-JAVA_HOME=/home/xlog/java
+source ~/.bash_profile
 
-CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/jre/lib
+cd ..
+
+if [ "$CLASSPATH" == "" ]
+then
+  CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+fi
 
 LIBPATH="lib"
 
 export LIBPATH
 
-for f in `find $LIBPATH -name '*.jar'`
-  do
-    CLASSPATH=$CLASSPATH:$f
-  done
-
+for f in `find $LIBPATH -name '*.jar' | sort -d`
+do
+  CLASSPATH=$CLASSPATH:$f
+done
 # ******************************************************************
 # ** Set java runtime options                                     **
 # ** Change 256m to higher values in case you run out of memory.  **
 # ******************************************************************
 
 #export DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,address=3005,server=y,suspend=n"
-OPT="-Xmx8g -Xms4g -Xmn2g -Xss128k -XX:+UseParallelGC -XX:ParallelGCThreads=20 -cp $CLASSPATH"
+OPT="-Xmx12000m -Xms10000m -Xmn8000m -Xss256k -XX:+UseParallelGC -XX:ParallelGCThreads=20 -cp $CLASSPATH"
 
 # ***************
 # ** Run...    **
