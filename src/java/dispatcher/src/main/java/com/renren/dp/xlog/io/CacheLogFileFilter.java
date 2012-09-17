@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.renren.dp.xlog.handler.FileNameHandlerFactory;
 import com.renren.dp.xlog.util.Constants;
 
 public class CacheLogFileFilter implements FileFilter{
@@ -15,8 +16,8 @@ public class CacheLogFileFilter implements FileFilter{
 	private int len;
 	
 	public CacheLogFileFilter(int oplogCacheTime){
-		sdf=new SimpleDateFormat(Constants.FILE_NAME_FORMAT_MIN);
-		len=Constants.FILE_NAME_FORMAT_MIN.length();
+		sdf=FileNameHandlerFactory.getInstance().getFileNameDataFormat();
+		len=FileNameHandlerFactory.getInstance().getFileNameDataFormatLen();
 		threshold=System.currentTimeMillis()-oplogCacheTime;
 	} 
 	

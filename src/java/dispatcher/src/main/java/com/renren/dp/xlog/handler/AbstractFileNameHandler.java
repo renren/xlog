@@ -7,7 +7,11 @@ public abstract class AbstractFileNameHandler {
 
 	protected SimpleDateFormat sdf =null;
 	
+	public abstract SimpleDateFormat getFileNameDataFormat();
+	
 	public abstract String getCacheLogFileNum();
+	
+	public abstract int getFileNameDataFormatLen();
 	
 	public String getHDFSLogFileNum(){
 		return sdf.format(new Date()).substring(0,13);

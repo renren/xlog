@@ -15,4 +15,15 @@ public class FileNameHandlerOf10Min extends AbstractFileNameHandler{
 	public String getCacheLogFileNum(){
 		return sdf.format(new Date()).substring(0,15)+"0";
 	}
+
+	@Override
+	public SimpleDateFormat getFileNameDataFormat() {
+		return sdf;
+	}
+
+	@Override
+	public int getFileNameDataFormatLen() {
+		// TODO Auto-generated method stub
+		return Constants.FILE_NAME_FORMAT_MIN.length();
+	}
 }

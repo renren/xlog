@@ -8,8 +8,6 @@ import com.renren.dp.xlog.util.Constants;
 
 public class FileNameHandlerOfHour extends AbstractFileNameHandler{
 
-	private SimpleDateFormat sdf =null;
-	
 	public FileNameHandlerOfHour(){
 		sdf = new SimpleDateFormat(Constants.FILE_NAME_FORMAT_HOUR);
 	}
@@ -19,4 +17,14 @@ public class FileNameHandlerOfHour extends AbstractFileNameHandler{
 		return sdf.format(new Date());
 	}
 
+	@Override
+	public SimpleDateFormat getFileNameDataFormat() {
+		// TODO Auto-generated method stub
+		return sdf;
+	}
+
+	@Override
+	public int getFileNameDataFormatLen() {
+		return Constants.FILE_NAME_FORMAT_HOUR.length();
+	}
 }
