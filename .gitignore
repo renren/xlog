@@ -4,4 +4,8 @@
 .classpath
 .settings
 *~
-.target
+cache.data.dir
+target
+logs
+generated
+build
