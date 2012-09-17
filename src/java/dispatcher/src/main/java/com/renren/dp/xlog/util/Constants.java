@@ -4,7 +4,7 @@ public interface Constants {
 
   public static final String FILE_NAME_FORMAT_MIN="yyyy-MM-dd-HH-mm";
   
-  //public static final String FILE_NAME_FORMAT_HOUR="yyyy-MM-dd-HH";
+  public static final String FILE_NAME_FORMAT_HOUR="yyyy-MM-dd-HH";
   //1024*1024
   public static int HDFS_BATCH_COMMIT_SIZE=1048576;
   //1024*1024
@@ -21,4 +21,8 @@ public interface Constants {
   public static final String VERSION="1.0";
   
   public static final String ZK_DISPATCHERS_PATH="/xlog/dispatchers";
+  
+  public static final String WRITE_LOCAL_ONLY_CATEGORIES_LIST="write.local.only.categories.list";
+  //time unit s(second)
+  public static final long WRITE_LOCAL_ONLY_CATEGORIES_LIST_FILE_CHECK_INTERVAL=120;
 }

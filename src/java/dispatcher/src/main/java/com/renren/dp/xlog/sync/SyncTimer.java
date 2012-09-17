@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.TimerTask;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.renren.dp.xlog.cache.CacheManager;
 import com.renren.dp.xlog.cache.CacheManagerFactory;
+import com.renren.dp.xlog.cache.WriteLocalOnlyCategoriesCache;
 import com.renren.dp.xlog.config.Configuration;
 import com.renren.dp.xlog.io.SuffixFileFilter;
 import com.renren.dp.xlog.storage.StorageRepository;
@@ -22,14 +24,14 @@ public class SyncTimer extends TimerTask {
 	private String cacheLogDir = null;
 	private int slaveLogRootDirLen;
 	private String slaveLogDir = null;
-	private String[] categoriesPath=null;
 	private int batchCommitSize;
+	private WriteLocalOnlyCategoriesCache wlcc=null;
 
-	 private static Logger logger = LoggerFactory.getLogger(SyncTimer.class);
+	private static Logger logger = LoggerFactory.getLogger(SyncTimer.class);
 
-	public SyncTimer(String[] categoriesPath) {
+	public SyncTimer(WriteLocalOnlyCategoriesCache wlcc) {
+		this.wlcc=wlcc;
 		String storePath = Configuration.getString("oplog.store.path");
-		this.categoriesPath=categoriesPath;
 		slaveLogDir = storePath + "/" + Configuration.getString("storage.type");
 		slaveLogRootDirLen=slaveLogDir.length();
 		batchCommitSize = Configuration.getInt("batch.commit.size", 1000);
@@ -82,14 +84,15 @@ public class SyncTimer extends TimerTask {
 	}
 	
 	private boolean isDemandSync(String cachePath){
-		if(categoriesPath==null){
+		Set<String> set=wlcc.getCategories();
+		if(set.isEmpty()){
 			return true;
 		}
-		for(String s:categoriesPath){
+		for(String s:set){
 			if(cachePath.endsWith(s)){
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 }

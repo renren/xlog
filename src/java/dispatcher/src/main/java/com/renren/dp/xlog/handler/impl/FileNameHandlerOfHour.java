@@ -6,24 +6,25 @@ import java.util.Date;
 import com.renren.dp.xlog.handler.AbstractFileNameHandler;
 import com.renren.dp.xlog.util.Constants;
 
-public class FileNameHandlerOf10Min extends AbstractFileNameHandler{
+public class FileNameHandlerOfHour extends AbstractFileNameHandler{
 
-	public FileNameHandlerOf10Min(){
-		sdf = new SimpleDateFormat(Constants.FILE_NAME_FORMAT_MIN);
+	public FileNameHandlerOfHour(){
+		sdf = new SimpleDateFormat(Constants.FILE_NAME_FORMAT_HOUR);
 	}
 	
-	public String getCacheLogFileNum(){
-		return sdf.format(new Date()).substring(0,15)+"0";
+	@Override
+	public String getCacheLogFileNum() {
+		return sdf.format(new Date());
 	}
 
 	@Override
 	public SimpleDateFormat getFileNameDataFormat() {
+		// TODO Auto-generated method stub
 		return sdf;
 	}
 
 	@Override
 	public int getFileNameDataFormatLen() {
-		// TODO Auto-generated method stub
-		return Constants.FILE_NAME_FORMAT_MIN.length();
+		return Constants.FILE_NAME_FORMAT_HOUR.length();
 	}
 }

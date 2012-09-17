@@ -10,24 +10,31 @@ import com.renren.dp.xlog.io.CacheLogFileFilter;
 
 public class ClearTimer extends TimerTask{
 
-	private int oplogCacheTime;
-	private File slaveLogDir;
+	private int localStorageCacheTime;
+	private int errorDataCacheTime;
+	private File errorDataLogDir;
 	private File cacheLogDir;
-	public ClearTimer(int oplogCacheTime){
-		this.oplogCacheTime=oplogCacheTime;
+	public ClearTimer(int localStorageCacheTime,int errorDataCacheTime){
+		this.localStorageCacheTime=localStorageCacheTime;
+		this.errorDataCacheTime=errorDataCacheTime;
 		String storePath=Configuration.getString("oplog.store.path");
-		slaveLogDir=new File(storePath+"/"+Configuration.getString("storage.type"));
+		errorDataLogDir=new File(storePath+"/"+Configuration.getString("storage.type"));
 		cacheLogDir=new File(storePath+"/"+CacheManager.CACHE_TYPE);
 	}
 	@Override
 	public void run() {
-		CacheLogFileFilter clff=new CacheLogFileFilter(oplogCacheTime);
-		if(cacheLogDir.exists()){
-			clearUp(cacheLogDir,clff);
+		if(localStorageCacheTime>0){
+			CacheLogFileFilter opLogCLFF=new CacheLogFileFilter(localStorageCacheTime);
+			if(cacheLogDir.exists()){
+				clearUp(cacheLogDir,opLogCLFF);
+			}
 		}
 		
-		if(slaveLogDir.exists()){
-			clearUp(slaveLogDir,clff);
+		if(errorDataCacheTime>0){
+			CacheLogFileFilter storageCLFF=new CacheLogFileFilter(errorDataCacheTime);
+			if(errorDataLogDir.exists()){
+				clearUp(errorDataLogDir,storageCLFF);
+			}
 		}
 	}
 

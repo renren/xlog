@@ -8,8 +8,6 @@ import com.renren.dp.xlog.util.Constants;
 
 public class FileNameHandlerOf5Min extends AbstractFileNameHandler{
 
-	private SimpleDateFormat sdf =null;
-	
 	public FileNameHandlerOf5Min(){
 		sdf = new SimpleDateFormat(Constants.FILE_NAME_FORMAT_MIN);
 	}
@@ -22,5 +20,17 @@ public class FileNameHandlerOf5Min extends AbstractFileNameHandler{
 		}else{
 			return strDate.substring(0,15)+"0";
 		}
+	}
+
+	@Override
+	public SimpleDateFormat getFileNameDataFormat() {
+		// TODO Auto-generated method stub
+		return sdf;
+	}
+
+	@Override
+	public int getFileNameDataFormatLen() {
+		// TODO Auto-generated method stub
+		return Constants.FILE_NAME_FORMAT_MIN.length();
 	}
 }
