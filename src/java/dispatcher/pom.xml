@@ -18,7 +18,42 @@
   </properties>
   
   <build>
-    <plugins>
+      <plugins>
+        <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-antrun-plugin</artifactId>
+           <executions>
+               <execution>
+                   <id>add-source</id>
+                   <phase>generate-sources</phase>
+                   <goals>
+                        <goal>run</goal>
+                   </goals>
+                   <configuration>
+                       <tasks>
+                           <!-- the silce2java version should refer to the ant-ice.jar version -->
+                           <taskdef name="slice2java" classname="Slice2JavaTask" classpath="/opt/Ice-3.3/lib/ant-ice.jar" />
+                           <echo message="compiling UtilSlice to Java" />
+                           <mkdir dir="src/generated/java" />
+                           <slice2java outputdir="src/generated/java">
+                                 <includepath>
+                                     <pathelement path="../../../interface" />
+                                     <pathelement path="/opt/Ice-3.3/slice" />
+                                 </includepath>
+                                 <fileset dir="../../../interface" includes="*.ice" />
+                           </slice2java>
+                           <echo message="xlog ice code generated" />
+                           <mkdir dir="src/generated/java/com/renren/dp/xlog/" />
+                           <exec executable="./version.sh" output="src/generated/java/com/renren/dp/xlog/package-info.java">
+                           </exec>
+                           <exec executable="echo" output="src/generated/java/com/renren/dp/xlog/package-info.java" append="true">
+                           <arg value="package com.renren.dp.xlog;" />
+                           </exec>
+                       </tasks>
+                   </configuration>
+               </execution>
+           </executions>
+       </plugin>
      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
@@ -31,7 +66,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>../../../build/generated</source>
+                <source>src/generated/java</source>
                 <source>src/main/java</source>
               </sources>
             </configuration>
@@ -46,7 +81,7 @@
           <source>1.6</source>
           <target>1.6</target>
           <compilerArguments>
-            <sourcepath>../../../build/generated</sourcepath>
+            <sourcepath>src/generated/java</sourcepath>
             <sourcepath>src/main/java</sourcepath>
           </compilerArguments>
         </configuration>
@@ -66,9 +101,11 @@
           </execution>
         </executions>
         <configuration>
-          <executable>make</executable>
+          <executable>protoc</executable>
           <arguments>
-            <argument>../../../interface</argument>
+              <argument>--java_out=src/generated/java</argument>
+              <argument>--proto_path=../../../interface</argument>
+              <argument>../../../interface/*.proto</argument>
           </arguments>
         </configuration>
       </plugin>
