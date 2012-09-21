@@ -32,8 +32,6 @@ public class XLogAppender extends AppenderSkeleton {
   private ProtocolType protocolType = ProtocolType.UDP;
   private boolean async = true;
   private static Map<String, String[]> categoriesMapCache = new ConcurrentHashMap<String, String[]>(10);
-  private static String loggerCommonSplitName = "\\.";
-  private static String loggerErrorSplitName = " ";
   
   public XLogAppender() {
   }
@@ -86,9 +84,9 @@ public class XLogAppender extends AppenderSkeleton {
     return true;
   }
 
-  private static String[] getCategories(String loggerName, String regex) {
+  private static String[] getCategories(String loggerName) {
     if (!categoriesMapCache.containsKey(loggerName)) {
-      categoriesMapCache.put(loggerName, loggerName.split(regex));
+      categoriesMapCache.put(loggerName, loggerName.split("(\\.| )"));
     }
     return categoriesMapCache.get(loggerName);
   }
@@ -100,10 +98,10 @@ public class XLogAppender extends AppenderSkeleton {
     }
     LogData ld = new LogData();
     if (event.getThrowableInformation() == null) {
-      ld.categories = getCategories(event.getLoggerName(), loggerCommonSplitName);
+      ld.categories = getCategories(event.getLoggerName());
       ld.logs = new String[] { layout.format(event) };
     } else {
-      ld.categories = getCategories(event.getLoggerName(), loggerErrorSplitName);
+      ld.categories = getCategories(event.getLoggerName());
       StringBuffer info = new StringBuffer();
       info.append(layout.format(event));
       for (String o : event.getThrowableStrRep()) {

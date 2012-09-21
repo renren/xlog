@@ -24,7 +24,7 @@ public class TestXLogAppender {
 //    l.addAppender(app);
 
     l.fatal("first fatal");
-    l = Logger.getLogger("test.3g.access.test");
+    l = Logger.getLogger("test.3g.access.test 2");
     l.error("second error");
     l.debug("third debug");
     l.info("third23 info");
