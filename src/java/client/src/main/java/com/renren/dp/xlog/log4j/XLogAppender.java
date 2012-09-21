@@ -1,5 +1,9 @@
 package com.renren.dp.xlog.log4j;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Layout;
 import org.apache.log4j.helpers.LogLog;
@@ -27,7 +31,10 @@ public class XLogAppender extends AppenderSkeleton {
   private int cacheQueueSize;
   private ProtocolType protocolType = ProtocolType.UDP;
   private boolean async = true;
-
+  private static Map<String, String[]> categoriesMapCache = new ConcurrentHashMap<String, String[]>(10);
+  private static String loggerCommonSplitName = "\\.";
+  private static String loggerErrorSplitName = " ";
+  
   public XLogAppender() {
   }
 
@@ -57,7 +64,7 @@ public class XLogAppender extends AppenderSkeleton {
 
   @Override
   public void activateOptions() {
-    LogLog.debug("Xlog Appender (" + this.getClass().getName() + ") parameters: cacheFileDir=" + cacheFileDir
+    LogLog.debug("Xlog Appender (" + this + ") parameters: cacheFileDir=" + cacheFileDir
         + ", cacheQueueSize=" + cacheQueueSize + ", protocolType=" + protocolType + ", async=" + async);
     client = XlogClientFactory.getInstance(async);
     try {
@@ -79,6 +86,13 @@ public class XLogAppender extends AppenderSkeleton {
     return true;
   }
 
+  private static String[] getCategories(String loggerName, String regex) {
+    if (!categoriesMapCache.containsKey(loggerName)) {
+      categoriesMapCache.put(loggerName, loggerName.split(regex));
+    }
+    return categoriesMapCache.get(loggerName);
+  }
+  
   @Override
   protected void append(LoggingEvent event) {
     if (!initialized) {
@@ -86,10 +100,10 @@ public class XLogAppender extends AppenderSkeleton {
     }
     LogData ld = new LogData();
     if (event.getThrowableInformation() == null) {
-      ld.categories = event.getLoggerName().split("\\.");
+      ld.categories = getCategories(event.getLoggerName(), loggerCommonSplitName);
       ld.logs = new String[] { layout.format(event) };
     } else {
-      ld.categories = event.getLoggerName().split(" ");
+      ld.categories = getCategories(event.getLoggerName(), loggerErrorSplitName);
       StringBuffer info = new StringBuffer();
       info.append(layout.format(event));
       for (String o : event.getThrowableStrRep()) {
