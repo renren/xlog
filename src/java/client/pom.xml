@@ -2,11 +2,13 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  <!--
   <parent>
     <artifactId>xlog</artifactId>
     <groupId>com.renren.dp</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
+-->
   
   <groupId>com.renren.dp</groupId>
   <artifactId>xlog-client</artifactId>
@@ -20,6 +22,41 @@
   </properties>
   <build>
     <plugins>
+        <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-antrun-plugin</artifactId>
+           <executions>
+               <execution>
+                   <id>add-source</id>
+                   <phase>generate-sources</phase>
+                   <goals>
+                        <goal>run</goal>
+                   </goals>
+                   <configuration>
+                       <tasks>
+                           <!-- the silce2java version should refer to the ant-ice.jar version -->
+                           <taskdef name="slice2java" classname="Slice2JavaTask" classpath="/opt/Ice-3.3/lib/ant-ice.jar" />
+                           <echo message="compiling UtilSlice to Java" />
+                           <mkdir dir="src/generated/java" />
+                           <slice2java outputdir="src/generated/java">
+                                 <includepath>
+                                     <pathelement path="../../../interface" />
+                                     <pathelement path="/opt/Ice-3.3/slice" />
+                                 </includepath>
+                                 <fileset dir="../../../interface" includes="*.ice" />
+                           </slice2java>
+                           <echo message="xlog ice code generated" />
+                           <mkdir dir="src/generated/java/com/renren/dp/xlog/" />
+                           <exec executable="./version.sh" output="src/generated/java/com/renren/dp/xlog/package-info.java">
+                           </exec>
+                           <exec executable="echo" output="src/generated/java/com/renren/dp/xlog/package-info.java" append="true">
+                           <arg value="package com.renren.dp.xlog;" />
+                           </exec>
+                       </tasks>
+                   </configuration>
+               </execution>
+           </executions>
+           </plugin>
      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
@@ -32,7 +69,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>../../../build/generated</source>
+                <source>src/generated/java</source>
                 <source>src/main/java</source>
                 <source>src/main/resources</source>
               </sources>
@@ -47,12 +84,36 @@
           <source>1.6</source>
           <target>1.6</target>
           <compilerArguments>
-            <sourcepath>../../../build/generated</sourcepath>
+            <sourcepath>src/generated/java</sourcepath>
             <sourcepath>src/main/java</sourcepath>
             <sourcepath>src/main/resources</sourcepath>
           </compilerArguments>
         </configuration>
       </plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <executions>
+              <execution>
+                   <id>attach-sources</id>
+                   <goals>
+                         <goal>jar</goal>
+                   </goals>
+               </execution>
+           </executions>
+       </plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <executions>
+              <execution>
+                   <id>attach-javadocs</id>
+                   <goals>
+                         <goal>jar</goal>
+                   </goals>
+               </execution>
+           </executions>
+       </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -61,6 +122,11 @@
       <artifactId>junit</artifactId>
       <version>4.0</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
     </dependency>
     <dependency>
       <groupId>com.zeroc</groupId>

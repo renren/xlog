@@ -58,7 +58,7 @@ public class LogWriter {
 		String categories=null;
 		for(LogData logData:logDatas){
 			categories=transformCategories(logData.categories);
-			if(categories==null){
+			if(categories==null || "".equals(categories)){
 				continue;
 			}
 			for(String log:logData.logs){

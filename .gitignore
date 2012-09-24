@@ -1,2 +1,11 @@
 *.class
 *.o
+.project
+.classpath
+.settings
+*~
+cache.data.dir
+target
+logs
+generated
+build

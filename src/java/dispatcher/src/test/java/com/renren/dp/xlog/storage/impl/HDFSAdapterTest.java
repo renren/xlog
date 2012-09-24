@@ -15,7 +15,7 @@ public class HDFSAdapterTest extends TestCase{
 	private StorageAdapter sa=null;
 	private LogData logData=null;
 	public void setUp(){
-		sa=new HDFSAdapter(Configuration.getString("xlog.uuid"),Configuration.getInt("hdfs.buffer.size", 4000));
+		sa=new HDFSAdapter0_21(Configuration.getString("xlog.uuid"),Configuration.getInt("hdfs.buffer.size", 4000));
 		try {
 			sa.initialize();
 		} catch (IOException e) {

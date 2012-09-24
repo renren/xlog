@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+        <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+                <param name="Target" value="System.out" />
+                <layout class="org.apache.log4j.PatternLayout">
+                        <param name="ConversionPattern" value="%n%-5p:%m %n==> %l%n" />
+                </layout>
+        </appender>
+
+        <appender name="log" class="org.apache.log4j.RollingFileAppender">
+                <param name="File" value="logs/dp-server.log" />
+                <param name="maxFileSize" value="100MB" />
+                <param name="maxBackupIndex" value="10" />
+                <layout class="org.apache.log4j.PatternLayout">
+                        <param name="ConversionPattern" value="[%-5p %d{yyyy-MM-dd HH:mm:ss.SSS}] %l [%m]%n" />
+                </layout>
+        </appender>
+        
+        <appender name="log3" class="com.renren.dp.xlog.log4j.XLogAppender">
+        	<param name="async" value="false"/>
+        	<!--<param name="cacheFileDir" value="/tmp/xlog"/> -->
+        	<param name="cacheQueueSize" value="10"/>
+        	<param name="protocolType" value="udp"/>
+        		<layout class="org.apache.log4j.PatternLayout">
+                        <param name="ConversionPattern" value="[%-5p %d{yyyy-MM-dd HH:mm:ss.SSS}] %l [%m]%n" />
+                </layout>
+        </appender>
+    
+        <logger name="test.3g.access" additivity="false">
+                <level value="debug" />
+                <appender-ref ref="log3" />
+        </logger>
+        
+</log4j:configuration>
