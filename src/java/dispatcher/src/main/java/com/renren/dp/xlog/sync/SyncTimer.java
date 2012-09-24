@@ -69,7 +69,7 @@ public class SyncTimer extends TimerTask {
 		}
 		SyncTask st = null;
 		for (File logFile : logFiles) {
-			if (logFile.isFile()) {
+			if (logFile.isFile()&&logFile.length()>0) {
 				st = new SyncTask(cacheLogDir, logFile,slaveLogRootDirLen, batchCommitSize);
 				st.setDaemon(true);
 				st.start();

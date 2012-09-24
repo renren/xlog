@@ -9,16 +9,15 @@ import com.renren.dp.xlog.util.Constants;
 public class FileNameHandlerOf10Min extends AbstractFileNameHandler{
 
 	public FileNameHandlerOf10Min(){
-		sdf = new SimpleDateFormat(Constants.FILE_NAME_FORMAT_MIN);
+		threadLocal = new ThreadLocal<SimpleDateFormat>() {
+			protected synchronized SimpleDateFormat initialValue() {
+				return new SimpleDateFormat(Constants.FILE_NAME_FORMAT_MIN);
+			}
+		};
 	}
 	
 	public String getCacheLogFileNum(){
-		return sdf.format(new Date()).substring(0,15)+"0";
-	}
-
-	@Override
-	public SimpleDateFormat getFileNameDataFormat() {
-		return sdf;
+		return getDateFormat().format(new Date()).substring(0,15)+"0";
 	}
 
 	@Override

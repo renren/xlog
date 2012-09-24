@@ -5,16 +5,22 @@ import java.util.Date;
 
 public abstract class AbstractFileNameHandler {
 
-	protected SimpleDateFormat sdf =null;
+	protected ThreadLocal<SimpleDateFormat> threadLocal =null;
 	
-	public abstract SimpleDateFormat getFileNameDataFormat();
+	protected SimpleDateFormat getDateFormat() {
+		return threadLocal.get();
+	}
 	
 	public abstract String getCacheLogFileNum();
 	
 	public abstract int getFileNameDataFormatLen();
 	
 	public String getHDFSLogFileNum(){
-		return sdf.format(new Date()).substring(0,13);
+		return  getDateFormat().format(new Date()).substring(0,13);
+	}
+
+	public SimpleDateFormat getFileNameDataFormat() {
+		return getDateFormat();
 	}
 	
 	public String getHDFSLogFileNum(String strDate){

@@ -9,23 +9,21 @@ import com.renren.dp.xlog.util.Constants;
 public class FileNameHandlerOf5Min extends AbstractFileNameHandler{
 
 	public FileNameHandlerOf5Min(){
-		sdf = new SimpleDateFormat(Constants.FILE_NAME_FORMAT_MIN);
+		threadLocal = new ThreadLocal<SimpleDateFormat>() {
+			protected synchronized SimpleDateFormat initialValue() {
+				return new SimpleDateFormat(Constants.FILE_NAME_FORMAT_MIN);
+			}
+		};
 	}
 	
 	public String getCacheLogFileNum() {
-		String strDate=sdf.format(new Date());
+		String strDate=getDateFormat().format(new Date());
 		int min=Integer.parseInt(strDate.substring(15,16));
 		if(min >= 5){
 			return strDate.substring(0,15)+"5";
 		}else{
 			return strDate.substring(0,15)+"0";
 		}
-	}
-
-	@Override
-	public SimpleDateFormat getFileNameDataFormat() {
-		// TODO Auto-generated method stub
-		return sdf;
 	}
 
 	@Override

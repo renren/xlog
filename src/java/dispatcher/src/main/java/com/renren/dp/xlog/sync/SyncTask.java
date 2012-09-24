@@ -46,16 +46,21 @@ public class SyncTask extends Thread{
 			//保证数据的一致性,
 			if(cacheLogFile.exists()){
 				res=store(cacheLogFile,categories);
+				if(res){
+					logger.info("Success to sync data,local cache file:"+cacheLogStr);
+				}else{
+					logger.info("Fail to sync data,local cache file:"+cacheLogStr);
+				}
 			}
 		}else{
 			cacheLogFile=new File(cacheLogStr);
 			if(cacheLogFile.exists()){
 				res=store(slaveLogFile,categories);
-			}
-		}
-		if(res){
-			if(rename(cacheLogFile)){
-				rename(slaveLogFile);
+				if(res){
+					logger.info("Success to sync data,slave file:"+slaveLogFile.getAbsolutePath());
+				}else{
+					logger.info("Fail to sync data,slave file:"+slaveLogFile.getAbsolutePath());
+				}
 			}
 		}
 	}
@@ -115,7 +120,7 @@ public class SyncTask extends Thread{
 		}
 		return res;
 	}
-	private boolean rename(File file){
-		return file.renameTo(new File(file.getAbsolutePath()+Constants.LOG_SYNC_FINISHED_SUFFIX));
-	}
+//	private boolean rename(File file){
+//		return file.renameTo(new File(file.getAbsolutePath()+Constants.LOG_SYNC_FINISHED_SUFFIX));
+//	}
 }
