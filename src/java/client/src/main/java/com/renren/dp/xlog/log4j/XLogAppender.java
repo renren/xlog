@@ -1,7 +1,11 @@
 package com.renren.dp.xlog.log4j;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.AppenderSkeleton;
@@ -28,11 +32,12 @@ public class XLogAppender extends AppenderSkeleton {
   private XlogClient client;
   // parameters with the logger
   private String cacheFileDir = "cache.data.dir";
-  private int cacheQueueSize;
+  private int MAX_CACHE_QUEUE_SIZE = 0;
+  private int DEFAULT_CACHE_QUEUE_SIZE = 50000;
   private ProtocolType protocolType = ProtocolType.UDP;
   private boolean async = true;
-  private static Map<String, String[]> categoriesMapCache = new ConcurrentHashMap<String, String[]>(10);
-  
+  private Map<String, String[]> categoriesMapCache;
+
   public XLogAppender() {
   }
 
@@ -51,7 +56,11 @@ public class XLogAppender extends AppenderSkeleton {
   }
 
   public void setCacheQueueSize(int cacheQueueSize) {
-    this.cacheQueueSize = cacheQueueSize;
+    if (cacheQueueSize < DEFAULT_CACHE_QUEUE_SIZE) {
+      this.MAX_CACHE_QUEUE_SIZE = cacheQueueSize;
+    } else if (cacheQueueSize >= DEFAULT_CACHE_QUEUE_SIZE) {
+      this.MAX_CACHE_QUEUE_SIZE = DEFAULT_CACHE_QUEUE_SIZE;
+    }
   }
 
   public void setProtocolType(String protocolType) {
@@ -62,11 +71,14 @@ public class XLogAppender extends AppenderSkeleton {
 
   @Override
   public void activateOptions() {
-    LogLog.debug("Xlog Appender (" + this + ") parameters: cacheFileDir=" + cacheFileDir
-        + ", cacheQueueSize=" + cacheQueueSize + ", protocolType=" + protocolType + ", async=" + async);
+    LogLog.debug("Xlog Appender (" + this + ") parameters: cacheFileDir=" + cacheFileDir + ", cacheQueueSize="
+        + MAX_CACHE_QUEUE_SIZE + ", protocolType=" + protocolType + ", async=" + async);
     client = XlogClientFactory.getInstance(async);
     try {
-      client.initialize(cacheFileDir, cacheQueueSize, protocolType);
+      client.initialize(cacheFileDir, 0, protocolType);
+      logMap = new HashMap<String, List<String>>();
+      lengthMap = new HashMap<String, Integer>();
+      categoriesMapCache = new HashMap<String, String[]>(10);
       initialized = true;
     } catch (InitializationException e) {
       initialized = false;
@@ -76,7 +88,24 @@ public class XLogAppender extends AppenderSkeleton {
 
   @Override
   public void close() {
-    // do nothing
+    Set<String> categories = logMap.keySet();
+
+    for (String c : categories) {
+      LogData ld = new LogData();
+      List<String> logList = logMap.get(c);
+      ld.categories = getCategories(c);
+      ld.logs = logList.toArray(new String[0]);
+      client.doSend(new LogData[] { ld });
+      logMap.remove(c);
+      lengthMap.remove(c);
+    }
+    logMap.clear();
+    logMap = null;
+    lengthMap.clear();
+    lengthMap = null;
+    categoriesMapCache.clear();
+    categoriesMapCache = null;
+    client = null;
   }
 
   @Override
@@ -84,31 +113,51 @@ public class XLogAppender extends AppenderSkeleton {
     return true;
   }
 
-  private static String[] getCategories(String loggerName) {
+  private String[] getCategories(String loggerName) {
     if (!categoriesMapCache.containsKey(loggerName)) {
       categoriesMapCache.put(loggerName, loggerName.split("(\\.| )"));
     }
     return categoriesMapCache.get(loggerName);
   }
-  
+
+  private Map<String, List<String>> logMap;
+  private Map<String, Integer> lengthMap;
+
   @Override
   protected void append(LoggingEvent event) {
     if (!initialized) {
       return;
     }
-    LogData ld = new LogData();
-    if (event.getThrowableInformation() == null) {
-      ld.categories = getCategories(event.getLoggerName());
-      ld.logs = new String[] { layout.format(event) };
+    String categories = event.getLoggerName();
+    List<String> logList = logMap.get(categories);
+    int logLength = 0;
+    if (null != logList) {
+      logLength = lengthMap.get(categories);
     } else {
-      ld.categories = getCategories(event.getLoggerName());
-      StringBuffer info = new StringBuffer();
-      info.append(layout.format(event));
-      for (String o : event.getThrowableStrRep()) {
-        info.append(o).append("~");
-      }
-      ld.logs = new String[] { info.toString() };
+      logList = new ArrayList<String>();
     }
-    client.doSend(new LogData[] { ld });
+    String log = layout.format(event);
+    logList.add(log);
+    logLength += log.length();
+    if (event.getThrowableInformation() != null) {
+      for (String o : event.getThrowableStrRep()) {
+        logList.add(o);
+        logLength += o.length();
+      }
+    }
+    if (logLength < MAX_CACHE_QUEUE_SIZE) {
+      logMap.put(categories, logList);
+      lengthMap.put(categories, logLength);
+    } else {
+      LogData ld = new LogData();
+      ld.categories = getCategories(categories);
+      ld.logs = logList.toArray(new String[0]);
+      client.doSend(new LogData[] { ld });
+      logList.clear();
+      logMap.put(categories, logList);
+      lengthMap.put(categories, 0);
+    }
+
   }
+
 }
