@@ -26,8 +26,8 @@ public class TestXLogAppender {
     l.error("second error");
     l.debug("third debug");
     long i = 0;
-    // while (true) {
-    for (; i < 100; i++) {
+     while (true) {
+      //    for (; i < 100; i++) {
       l.info("third23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 infothird23 info"
           + i++);
       l.error("second error");
@@ -48,11 +48,11 @@ public class TestXLogAppender {
     // System.out.println("***" + le.getMessage());
     // }
 
-    try {
-      Thread.sleep(1000 * 100);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    // try {
+    // Thread.sleep(1000 * 100);
+    // } catch (InterruptedException e) {
+    // e.printStackTrace();
+    // }
   }
 
 }

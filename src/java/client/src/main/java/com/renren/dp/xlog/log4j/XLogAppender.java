@@ -32,11 +32,12 @@ public class XLogAppender extends AppenderSkeleton {
   private XlogClient client;
   // parameters with the logger
   private String cacheFileDir = "cache.data.dir";
-  private int MAX_CACHE_QUEUE_SIZE = 0;
-  private int DEFAULT_CACHE_QUEUE_SIZE = 50000;
+  private int MAX_SEND_SIZE = 0;
+  private int DEFAULT_MAX_SEND_SIZE = 50000;
   private ProtocolType protocolType = ProtocolType.UDP;
   private boolean async = true;
   private Map<String, String[]> categoriesMapCache;
+  private int cacheQueueSize;
 
   public XLogAppender() {
   }
@@ -56,10 +57,14 @@ public class XLogAppender extends AppenderSkeleton {
   }
 
   public void setCacheQueueSize(int cacheQueueSize) {
-    if (cacheQueueSize < DEFAULT_CACHE_QUEUE_SIZE) {
-      this.MAX_CACHE_QUEUE_SIZE = cacheQueueSize;
-    } else if (cacheQueueSize >= DEFAULT_CACHE_QUEUE_SIZE) {
-      this.MAX_CACHE_QUEUE_SIZE = DEFAULT_CACHE_QUEUE_SIZE;
+    this.cacheQueueSize = cacheQueueSize;
+  }
+
+  public void setMaxSendSize(int maxSendSize) {
+    if (maxSendSize < DEFAULT_MAX_SEND_SIZE) {
+      this.MAX_SEND_SIZE = maxSendSize;
+    } else {
+      this.MAX_SEND_SIZE = DEFAULT_MAX_SEND_SIZE;
     }
   }
 
@@ -72,10 +77,11 @@ public class XLogAppender extends AppenderSkeleton {
   @Override
   public void activateOptions() {
     LogLog.debug("Xlog Appender (" + this + ") parameters: cacheFileDir=" + cacheFileDir + ", cacheQueueSize="
-        + MAX_CACHE_QUEUE_SIZE + ", protocolType=" + protocolType + ", async=" + async);
+        + cacheQueueSize + ", maxSendSize=" + MAX_SEND_SIZE + ", protocolType=" + protocolType + ", async=" + async);
+    LogLog.debug("the tutorial & Reference link: http://wiki.d.xiaonei.com/pages/viewpage.action?pageId=14846863");
     client = XlogClientFactory.getInstance(async);
     try {
-      client.initialize(cacheFileDir, 0, protocolType);
+      client.initialize(cacheFileDir, cacheQueueSize, protocolType);
       logMap = new HashMap<String, List<String>>();
       lengthMap = new HashMap<String, Integer>();
       categoriesMapCache = new HashMap<String, String[]>(10);
@@ -145,7 +151,7 @@ public class XLogAppender extends AppenderSkeleton {
         logLength += o.length();
       }
     }
-    if (logLength < MAX_CACHE_QUEUE_SIZE) {
+    if (logLength < MAX_SEND_SIZE) {
       logMap.put(categories, logList);
       lengthMap.put(categories, logLength);
     } else {
