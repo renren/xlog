@@ -68,6 +68,7 @@ void DispatcherConfig::process(ZKWatchedEvent event)
 
 void DispatcherConfig::updateSlot(int slot_id)
 {
+    IceUtil::RWRecMutex::WLock lock(_config_mutex);
     std::string path(DISPATCHERS_PATH);
     path.append("/");
     path.append(boost::lexical_cast<std::string>(slot_id));

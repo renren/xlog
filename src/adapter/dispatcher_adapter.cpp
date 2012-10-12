@@ -32,8 +32,12 @@ bool DispatcherAdapter::sendNormal(const slice::LogData& data)
     IceUtil::RWRecMutex::RLock lock(_prx_lock);
     
     slice::DispatcherPrx dp=nca->doChoose(data.categories,_prx);
-    dp->addLogData(data);
-
+    try{
+      dp->addLogData(data);
+    } catch(...){
+      std::cout << __FILE__ << ":" << __LINE__ << " fail to send log to dispatcher nodes,may be disconnect dispatcher!" << std::endl;
+      return false;
+    }
     return true;
 }
 
@@ -46,6 +50,10 @@ bool DispatcherAdapter::sendFailed(const slice::LogDataSeq& data)
 bool DispatcherAdapter::rebuild_prx()
 {
     std::map<int,std::vector<std::string> > new_address = _config_dispatcher->get();
+    if(new_address.empty()){
+      return false;
+    }
+    std::map< int , std::vector<DispatcherNode> > tmp_map;
     IceUtil::RWRecMutex::WLock lock(_prx_lock);
     std::map<int,std::vector<std::string> >::iterator iter;
     bool _res = false;
@@ -59,15 +67,18 @@ bool DispatcherAdapter::rebuild_prx()
         std::vector<DispatcherNode> dns;
         for(int j=0;j<size;j++)
         {
-           std::cout << __FILE__ << ":" << __LINE__ << " constructing endpoint : " << iter->second.at(j) << std::endl;
+           std::string addr=iter->second.at(j);
+           std::cout << __FILE__ << ":" << __LINE__ << " constructing endpoint : " << addr << std::endl;
            DispatcherNode dn;
-           dn.dispatcher_prx = slice::DispatcherPrx::uncheckedCast(_ic->stringToProxy(iter->second.at(j))); 
+           dn.dispatcher_prx = slice::DispatcherPrx::uncheckedCast(_ic->stringToProxy(addr)); 
            dn.call_count = 0;
            dns.push_back(dn);
            _res = true;
         }
-        _prx[iter->first] = dns;
+        tmp_map[iter->first] = dns;
     }
+    _prx.clear();
+    _prx.swap(tmp_map);
     return _res;
 }
 

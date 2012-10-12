@@ -147,6 +147,7 @@ void SendWorker::run()
         while(!send(*it))
         {
           std::cout << " fail to send data !" << std::endl;
+          sleep(2);
         }
         _data.erase(it);
     }
