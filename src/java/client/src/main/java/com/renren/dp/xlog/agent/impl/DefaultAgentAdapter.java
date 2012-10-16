@@ -50,8 +50,7 @@ public class DefaultAgentAdapter implements AgentAdapter{
         prx = AgentPrxHelper.uncheckedCast(ic
             .stringToProxy("A:udp -h "+tmp[0]+" -p "+tmp[1]).ice_locatorCacheTimeout(60).ice_compress(true).ice_datagram());
       }else if(protocolType==ProtocolType.TCP){
-        prx = AgentPrxHelper.uncheckedCast(ic
-            .stringToProxy("A:tcp -h "+tmp[0]+" -p "+tmp[1]));
+        prx = AgentPrxHelper.uncheckedCast(ic.stringToProxy("A:tcp -h "+tmp[0]+" -p "+tmp[1]).ice_compress(true));
       }
       prxList.add(prx);
     }

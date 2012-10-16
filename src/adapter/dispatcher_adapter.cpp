@@ -70,7 +70,7 @@ bool DispatcherAdapter::rebuild_prx()
            std::string addr=iter->second.at(j);
            std::cout << __FILE__ << ":" << __LINE__ << " constructing endpoint : " << addr << std::endl;
            DispatcherNode dn;
-           dn.dispatcher_prx = slice::DispatcherPrx::uncheckedCast(_ic->stringToProxy(addr)); 
+           dn.dispatcher_prx = slice::DispatcherPrx::uncheckedCast(_ic->stringToProxy(addr)->ice_compress(true)); 
            dn.call_count = 0;
            dns.push_back(dn);
            _res = true;
